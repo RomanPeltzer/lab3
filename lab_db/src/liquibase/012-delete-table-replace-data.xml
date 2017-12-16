@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="012-delete-table-replace-data.xml">
+
+    <changeSet id="012" author="Roman">
+        <sql>
+            CREATE TABLE test_table(
+            id_teach INTEGER NOT NULL PRIMARY KEY ,
+            name VARCHAR(50) NOT NULL ,
+            surname VARCHAR(50) NOT NULL
+            )
+        </sql>
+        <sql>
+            INSERT INTO  test_table SELECT * FROM teachers
+        </sql>
+        <sql>
+            DROP TABLE teachers CASCADE
+        </sql>
+    </changeSet>
+</databaseChangeLog>

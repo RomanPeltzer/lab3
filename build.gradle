@@ -1,0 +1,185 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'liquibase'
+
+sourceCompatibility = 1.8
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.1"
+        classpath "org.liquibase:liquibase-core:3.4.1"
+        classpath ("org.liquibase:liquibase-gradle-plugin:1.1.1") {
+            exclude(module: 'liquibase-core')   // exclude the dependency on liquibase-core:3.3.5
+        }
+        classpath "org.postgresql:postgresql:42.1.4"
+    }
+}
+
+dependencies{
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+def changeLog = "$projectDir/lab_db/src/liquibase/V1/changelog-v1.xml"
+task('init') << {
+    println "executing init"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_1 = "$projectDir/lab_db/src/liquibase/003-clear-tables.xml"
+
+task('clear_tab') << {
+    println "executing clear_tables"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_1
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_2 = "$projectDir/lab_db/src/liquibase/009-rename-column.xml"
+
+task('prod') << {
+    println "executing prod"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_2
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_3 = "$projectDir/lab_db/src/liquibase/008-delete-all-table.xml"
+
+    task('delete_all_table') << {
+        println "executing delete_all_table"
+        liquibase {
+            activities {
+                main {
+                    changeLogFile changeLog_3
+                    url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                    username 'dbroot'
+                    password 'pinkhorsegohome97'
+                    driver "org.postgresql.Driver"
+                }
+            }
+        }
+    }
+
+def changeLog_4 = "$projectDir/lab_db/src/liquibase/005-update-notes.xml"
+
+task('upt_note') << {
+    println "executing upt_note"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_4
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_5 = "$projectDir/lab_db/src/liquibase/010-repl-new-col.xml"
+
+task('repl-new-col') << {
+    println "executing repl-new-col"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_5
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_6 = "$projectDir/lab_db/src/liquibase/012-delete-table-replace-data.xml"
+
+task('replace_data') << {
+    println "executing replace_data"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_6
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_7 = "$projectDir/lab_db/src/liquibase/007-delete-some-notes.xml"
+
+task('del_note') << {
+    println "del_note"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_7
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+def changeLog_8 = "$projectDir/lab_db/src/liquibase/006-delete-table.xml"
+
+task('del_tab') << {
+    println "del_tab"
+    liquibase {
+        activities {
+            main {
+                changeLogFile changeLog_8
+                url 'jdbc:postgresql://217.23.154.1:5432/labdb'
+                username 'dbroot'
+                password 'pinkhorsegohome97'
+                driver "org.postgresql.Driver"
+            }
+        }
+    }
+}
+
+
+
+
+
+
+

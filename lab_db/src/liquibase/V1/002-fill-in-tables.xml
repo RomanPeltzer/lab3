@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="002-fill-in-tables.xml">
+
+    <changeSet id="002" author="Roman">
+        <sql>
+            INSERT INTO faculties (id_fac, name)
+            VALUES ('1','ТЕФ'),
+            ('2','ФИОТ'),
+            ('3','ФПМ'),
+            ('4','ІПСА'),
+            ('5','ФЕЛ'),
+            ('6','ІХФ')
+        </sql>
+        <sql>
+            INSERT INTO students(id_stud, name, surname, fac_id)
+            VALUES ('1','Владислав','Облаухов','2'),
+            ('2','Андрій','Теленик','2'),
+            ('3','Валерій','Панарін','1'),
+            ('4','Антон','Буднічук','5'),
+            ('5','Роман','Пельцер','6')
+        </sql>
+        <sql>
+            INSERT INTO teachers(id_teach, name, surname)
+            VALUES ('1','Павло','Катін'),
+            ('2','Віктор','Долина'),
+            ('4','Валентина','Коваленко')
+        </sql>
+        <sql>
+            INSERT INTO subjects(id_subj, name, teacher_id)
+            VALUES ('1','Системне програмування','1'),
+            ('2','Архітектура комп`ютерних систем','2'),
+            ('3','Основи системної інженерії','2'),
+            ('4','Вища математика','4')
+        </sql>
+        <sql>
+            INSERT INTO students_subjects(stud_id, subj_id)
+            VALUES ('1','1'),
+            ('1','2'),
+            ('1','3'),
+            ('1','4'),
+            ('2','2'),
+            ('3','3'),
+            ('3','4'),
+            ('3','2'),
+            ('4','3'),
+            ('4','4')
+        </sql>
+    </changeSet>
+</databaseChangeLog>

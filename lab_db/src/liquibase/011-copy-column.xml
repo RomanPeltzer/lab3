@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="011-copy-column.xml">
+
+    <changeSet id="011" author="Roman">
+        <sql>
+            ALTER TABLE public.faculties
+            ADD COLUMN IF NOT EXISTS stud VARCHAR(50)
+        </sql>
+        <sql>
+            INSERT INTO public.faculties(stud)
+            SELECT stud_name FROM students
+        </sql>
+        <sql>
+            ALTER TABLE students
+            DROP COLUMN IF EXISTS name CASCADE
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="004-choose-some-students.xml">
+
+    <changeSet id="004" author="Roman">
+        <sql>
+            SELECT students.name, surname FROM public.students
+            JOIN postgres.public.faculties ON students.fac_id = faculties.id_fac
+            WHERE faculties.name = 'ФИОТ'
+        </sql>
+    </changeSet>
+</databaseChangeLog>
